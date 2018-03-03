@@ -99,8 +99,17 @@ mod tests {
     #[test]
     fn test() {
         assert!(Iterator::eq("camelCase".chars(), Convert::new("camel_case".chars(), Camel(false))));
+        assert!(Iterator::eq("camelCase".chars(), Convert::new("camelCase".chars(), Camel(false))));
         assert!(Iterator::eq("CamelCase".chars(), Convert::new("camel_case".chars(), Camel(true))));
+        assert!(Iterator::eq("CamelCase".chars(), Convert::new("camelCase".chars(), Camel(true))));
+        assert!(Iterator::eq("CamelCase".chars(), Convert::new("CamelCase".chars(), Camel(true))));
+        assert!(Iterator::eq("snake_case".chars(), Convert::new("snake_case".chars(), Snake(false))));
+        assert!(Iterator::eq("snake_case".chars(), Convert::new("SNAKE_CASE".chars(), Snake(false))));
+        assert!(Iterator::eq("snake_case".chars(), Convert::new("snakeCase".chars(), Snake(false))));
         assert!(Iterator::eq("snake_case".chars(), Convert::new("SnakeCase".chars(), Snake(false))));
+        assert!(Iterator::eq("SNAKE_CASE".chars(), Convert::new("snake_case".chars(), Snake(true))));
+        assert!(Iterator::eq("SNAKE_CASE".chars(), Convert::new("SNAKE_CASE".chars(), Snake(true))));
+        assert!(Iterator::eq("SNAKE_CASE".chars(), Convert::new("snakeCase".chars(), Snake(true))));
         assert!(Iterator::eq("SNAKE_CASE".chars(), Convert::new("SnakeCase".chars(), Snake(true))));
     }
 }
